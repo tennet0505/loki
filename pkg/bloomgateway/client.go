@@ -361,7 +361,7 @@ func mergeChunks(inputs ...[]*logproto.ShortRef) []*logproto.ShortRef {
 		v1.NewPeekingIter[*logproto.ShortRef](
 			v1.NewHeapIterator[*logproto.ShortRef](
 				func(a, b *logproto.ShortRef) bool {
-					return a.From.Before(b.From) || (a.From.Equal(b.From) && a.Through.Before(b.Through))
+					return a.From.Before(b.From) || (a.From.Equal(b.From) && a.Through.Before(b.Through)) || a.Checksum < b.Checksum
 				},
 				iters...,
 			),
